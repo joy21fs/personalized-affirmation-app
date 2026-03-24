@@ -263,34 +263,69 @@ export function AffirmationApp() {
     }
   }
 
-  const generateAffirmation = () => {
-    setIsLoading(true)
-    setStep(3)
-    
-    setTimeout(() => {
-      const mood = selectedMood || "other"
-      const context = selectedContext || "general"
-      const options = affirmations[mood][context]
-      const randomAffirmation = options[Math.floor(Math.random() * options.length)]
-      setAffirmation(randomAffirmation)
-      setIsLoading(false)
-    }, 1500)
-  }
+const generateAffirmation = async () => {
+  setIsLoading(true)
+  setStep(3)
 
-  const regenerate = () => {
-    setIsLoading(true)
-    setTimeout(() => {
-      const mood = selectedMood || "other"
-      const context = selectedContext || "general"
-      const options = affirmations[mood][context]
-      let newAffirmation = options[Math.floor(Math.random() * options.length)]
-      while (newAffirmation === affirmation && options.length > 1) {
-        newAffirmation = options[Math.floor(Math.random() * options.length)]
-      }
-      setAffirmation(newAffirmation)
-      setIsLoading(false)
-    }, 1000)
+  try {
+    const res = await fetch("/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        mood:
+          selectedMood === "other"
+            ? customMood || "unsure"
+            : selectedMood,
+        context:
+          selectedContext === "other"
+            ? customContext || "general"
+            : selectedContext,
+      }),
+    })
+
+    const data = await res.json()
+    setAffirmation(data.affirmation)
+  } catch (err) {
+    console.error(err)
+    setAffirmation("Something went wrong. Try again.")
+  } finally {
+    setIsLoading(false)
   }
+}
+
+const regenerate = async () => {
+  setIsLoading(true)
+
+  try {
+    const res = await fetch("/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        mood:
+          selectedMood === "other"
+            ? customMood || "unsure"
+            : selectedMood,
+        context:
+          selectedContext === "other"
+            ? customContext || "general"
+            : selectedContext,
+      }),
+    })
+
+    const data = await res.json()
+
+    setAffirmation(data.affirmation)
+  } catch (err) {
+    console.error(err)
+    setAffirmation("Something went wrong. Try again.")
+  } finally {
+    setIsLoading(false)
+  }
+}
 
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(affirmation)
