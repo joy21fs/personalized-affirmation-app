@@ -1,35 +1,56 @@
-# personalized-affirmation-app
+# Personalized Affirmation App
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+An AI-powered web app that generates short, emotionally aware affirmations based on a user’s mood and life context.
 
-## Built with v0
+## Live Demo
+https://personalized-affirmation-app.vercel.app/
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_9uaxISEZxb9ZaKV6a1ox2Uk6wpJS)
+## Why I Built This
 
-## Getting Started
+Most affirmation tools feel generic and impersonal.
 
-First, run the development server:
+I wanted to explore how AI can generate responses that feel:
+- emotionally aware
+- context-specific
+- grounded instead of cliché
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+This project focuses on designing AI interactions that feel human, not templated.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Select mood (e.g. anxious, overwhelmed)
+- Select context (e.g. work, relationships, future)
+- Generate personalized AI affirmations
+- Regenerate variations instantly
+- Copy to clipboard
+- Step-based, calming UI flow
 
-## Learn More
+## Tech Stack
 
-To learn more, take a look at the following resources:
+- Next.js (App Router)
+- React + TypeScript
+- Vercel AI SDK (AI Gateway)
+- v0 (AI-assisted UI generation and prototyping)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+## Architecture
 
-<a href="https://v0.app/chat/api/kiro/clone/joy21fs/personalized-affirmation-app" alt="Open in Kiro"><img src="https://pdgvvgmkdvyeydso.public.blob.vercel-storage.com/open%20in%20kiro.svg?sanitize=true" /></a>
+Client (React UI)
+→ API Route (/app/api/route.ts)
+→ Vercel AI SDK
+→ AI Gateway (model inference)
+
+## Key Decisions
+
+### Prompt Design
+- Constrained output to 1–2 sentences
+- Avoided generic phrases and clichés
+- Focused on emotional specificity instead of advice
+
+### API Design
+- Server-side AI calls to protect API keys
+- Frontend communicates via fetch to API route
+
+### UX Flow
+- Step-based interaction (mood → context → result)
+- Designed to reduce friction and cognitive load
