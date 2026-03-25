@@ -6,6 +6,11 @@ An AI-powered web app that generates short, emotionally aware affirmations based
 https://personalized-affirmation-app.vercel.app/
 
 
+https://github.com/user-attachments/assets/47f151ea-6756-470d-a490-0caab9403fe3
+
+
+
+
 ## Why I Built This
 
 Most affirmation tools feel generic and impersonal.
