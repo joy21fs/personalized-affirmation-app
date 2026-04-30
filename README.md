@@ -37,6 +37,7 @@ This project focuses on designing AI interactions that feel human, not templated
 - React + TypeScript
 - Vercel AI SDK (AI Gateway)
 - v0 (AI-assisted UI generation and prototyping)
+- Tailwind CSS
 
 ## Architecture
 
